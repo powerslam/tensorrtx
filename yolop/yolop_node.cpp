@@ -41,7 +41,7 @@ void YOLOPNode::publishYOLOPresult(const cv::Mat& img){
     cv_bridge::CvImage bridge(
         std_msgs::Header(), sensor_msgs::image_encodings::BGR8, this->yolop.get_img());
 
-    this->res_pub.publish(this->bridge.toImageMsg());
+    this->res_pub.publish(bridge.toImageMsg());
 }
 
 int main(int argc, char** argv) {

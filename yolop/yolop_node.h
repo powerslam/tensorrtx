@@ -31,8 +31,8 @@ public:
     YOLOPNode();
     ~YOLOPNode();
 
-    void imgCallback(const sensor_msgs::ImageConstPtr msg);
-    void compressedImgCallback(const sensor_msgs::ImageConstPtr msg);
+    void imgCallback(const sensor_msgs::ImageConstPtr& msg);
+    void compressedImgCallback(const sensor_msgs::CompressedImageConstPtr& msg);
 
     void publishYOLOPresult(const cv::Mat& img);
 };
