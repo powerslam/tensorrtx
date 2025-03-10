@@ -23,7 +23,7 @@ private:
     ros::Subscriber img_sub;
     image_transport::Publisher res_pub;
 
-    bool use_morai
+    bool use_morai;
 
     YOLOP yolop;
 
