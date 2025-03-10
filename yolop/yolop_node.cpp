@@ -9,7 +9,7 @@ YOLOPNode::YOLOPNode(): it(nh){
 
     ros::param::get("~use_morai", this->use_morai);
 
-    if(!use_morai) {
+    if(use_morai) {
         this->img_sub = nh.subscribe("/image_jpeg/compressed", 1, &YOLOPNode::compressedImgCallback, this);
     }
     
