@@ -6,7 +6,7 @@ import struct
 print("[WARN] Please download/clone YOLOP, then set YOLOP_BASE_DIR to the root of YOLOP")
 
 #YOLOP_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-YOLOP_BASE_DIR = "/home/user/jetson/tmp/YOLOP"
+YOLOP_BASE_DIR = "/home/foscar/ieve_2025/src/vision/src/YOLOP"
 
 sys.path.append(YOLOP_BASE_DIR)
 from lib.models import get_net

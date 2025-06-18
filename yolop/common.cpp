@@ -85,10 +85,13 @@ std::map<std::string, Weights> loadWeights(const std::string file) {
     // Read number of weight blobs
     int32_t count;
     input >> count;
+    std::cout << "count check start."  << std::endl;
     assert(count > 0 && "Invalid weight map file.");
+    std::cout << "count check done."  << std::endl;
 
     while (count--)
     {
+        std::cout << "count : " << count << '\n';
         Weights wt{ DataType::kFLOAT, nullptr, 0 };
         uint32_t size;
 
@@ -109,6 +112,7 @@ std::map<std::string, Weights> loadWeights(const std::string file) {
         weightMap[name] = wt;
     }
 
+    std::cout << "Loading Done.\n";
     return weightMap;
 }
 

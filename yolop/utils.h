@@ -6,6 +6,8 @@
 #include <iostream>
 #include "common.hpp"
 
+#include <ros/ros.h>
+
 #define SHOW_IMG
 
 static inline cv::Mat preprocess_img(cv::Mat& img, int input_w, int input_h) {
@@ -23,8 +25,18 @@ static inline cv::Mat preprocess_img(cv::Mat& img, int input_w, int input_h) {
         x = (input_w - w) / 2;
         y = 0;
     }
-    cv::Mat re(h, w, CV_8UC3);
-    cv::resize(img, re, re.size(), 0, 0, cv::INTER_LINEAR);
+
+    assert(!img.empty());
+    if(img.empty()){
+        ROS_INFO_STREAM("img is empty()? : yes");
+    } else {
+        ROS_INFO_STREAM("img is empty()? : no");    
+    }
+
+    ROS_INFO_STREAM("img type: " << img.type()); 
+
+    cv::Mat re;
+    cv::resize(img, re, cv::Size(w, h), 0, 0, cv::INTER_NEAREST);
     cv::Mat out(input_h, input_w, CV_8UC3, cv::Scalar(114, 114, 114));
     re.copyTo(out(cv::Rect(x, y, re.cols, re.rows)));
     cv::Mat tensor;

@@ -35,9 +35,10 @@ void YOLOPNode::compressedImgCallback(const sensor_msgs::CompressedImageConstPtr
 
 void YOLOPNode::publishYOLOPresult(const cv::Mat& img){
     this->yolop.set_img(img);
+
     auto inf = this->yolop.inference();
     this->yolop.visualization(inf);
-
+    
     cv_bridge::CvImage bridge(
         std_msgs::Header(), sensor_msgs::image_encodings::BGR8, this->yolop.get_img());
 

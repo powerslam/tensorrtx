@@ -13,7 +13,9 @@ namespace yolop_utils {
 
         // Create input tensor of shape {3, INPUT_H, INPUT_W} with name INPUT_BLOB_NAME
         ITensor* data = network->addInput(INPUT_BLOB_NAME, dt, Dims3{ 3, INPUT_H, INPUT_W });
+        std::cout << "hmm" << std::endl;
         assert(data);
+        std::cout << "oh" << std::endl;
 
         std::map<std::string, Weights> weightMap = loadWeights(wts_name);
         Weights emptywts{ DataType::kFLOAT, nullptr, 0 };
@@ -248,7 +250,7 @@ void YOLOP::read_engine_file(const std::string& engine_path){
 
     if(file.fail()) {
         IHostMemory* modelStream { nullptr };
-        std::string wts_name = "yolop.wts";
+        std::string wts_name = "/home/foscar/ieve_2025/src/vision/src/tensorrtx/yolop/build/yolop.wts";
         yolop_utils::APIToModel(BATCH_SIZE, &modelStream, wts_name);
         assert(modelStream != nullptr);
         std::ofstream p(engine_path, std::ios::binary);
@@ -342,6 +344,9 @@ std::vector<Yolo::Detection> YOLOP::inference(){
 }
 
 void YOLOP::visualization(const std::vector<Yolo::Detection>& res){
+    // cv::imshow("tmp_seg", this->tmp_seg);
+    // cv::imshow("tmp_lane", this->tmp_lane);
+
     cv::Mat seg_res(this->img.rows, this->img.cols, CV_32S);
     cv::resize(this->tmp_seg, seg_res, seg_res.size(), 0, 0, cv::INTER_NEAREST);
     
@@ -372,8 +377,8 @@ void YOLOP::visualization(const std::vector<Yolo::Detection>& res){
         cv::putText(this->img, std::to_string((int)res[j].class_id), cv::Point(r.x, r.y - 1), cv::FONT_HERSHEY_PLAIN, 1.2, cv::Scalar(0xFF, 0xFF, 0xFF), 2);
     }
 
-    cv::imshow("result", this->img);
-    cv::waitKey(1);
+    // cv::imshow("result", this->img);
+    // cv::waitKey(1);
 }
 
 YOLOP::~YOLOP(){
